@@ -1,11 +1,9 @@
 package com.example.diceroller
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import android.widget.TextView
-import android.widget.Toast
-import org.w3c.dom.Text
+import android.widget.ImageView
+import androidx.appcompat.app.AppCompatActivity
 import kotlin.random.Random
 
 /*
@@ -15,47 +13,42 @@ available to the largest number of devices and users possible, always use AppCom
  */
 
 class MainActivity : AppCompatActivity() {
-    //  Activities do not use a constructor to initialize the object.
-    // Instead, a series of predefined methods (called "lifecycle methods")
-    // are called as part of the activity setup.
+    //    Ideally, you should minimize the number of calls to findViewById(), because the Android
+//    system is searching the entire view hierarchy each time, and that's an expensive operation.
+//    It is a best practice to use lateinit with fields that hold views in just this way.
+//    The lateinit keyword promises the Kotlin compiler that the variable will be initialized
+//    before the code calls any operations on it.
+    lateinit var diceImage: ImageView
+    lateinit var diceImage2: ImageView
+
+    //    Activities do not use a constructor to initialize the object.
+//    Instead, a series of predefined methods (called "lifecycle methods")
+//    are called as part of the activity setup.
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // Resources do not include file extensions.
+//        Resources do not include file extensions.
         setContentView(R.layout.activity_main)
+        diceImage = findViewById(R.id.dice_image)
+        diceImage2 = findViewById(R.id.dice_image2)
 
         val rollButton: Button = findViewById(R.id.roll_button)
         rollButton.setOnClickListener { rollDice() }
-
-        val countUpButton: Button = findViewById(R.id.countUp_button)
-        countUpButton.setOnClickListener { countUp() }
-
-        val resetButton: Button = findViewById(R.id.reset_button)
-        resetButton.setOnClickListener { reset() }
     }
 
     private fun rollDice() {
-//        Toast.makeText(this, "button clicked",
-//            Toast.LENGTH_SHORT).show()
-        val randomInt = Random.nextInt(6) + 1
-
-        val resultText: TextView = findViewById(R.id.result_text)
-        resultText.text = randomInt.toString()
+        diceImage.setImageResource(getRandomDiceImage())
+        diceImage2.setImageResource(getRandomDiceImage())
     }
 
-    private fun countUp() {
-        val resultText: TextView = findViewById(R.id.result_text)
-        resultText.text = when(resultText.text.toString()) {
-            // If the text is the default "Hello World!", set that text to 1
-            "Hello World!" -> "1"
-            // If the number is already 6, do nothing
-            "6" -> "6"
-            // Otherwise, add 1 to it
-            else -> (resultText.text.toString().toInt() + 1).toString()
+    private fun getRandomDiceImage(): Int {
+
+        return when (Random.nextInt(6) + 1) {
+            1 -> R.drawable.dice_1
+            2 -> R.drawable.dice_2
+            3 -> R.drawable.dice_3
+            4 -> R.drawable.dice_4
+            5 -> R.drawable.dice_5
+            else -> R.drawable.dice_6
         }
-    }
-
-    private fun reset() {
-        val resultText: TextView = findViewById(R.id.result_text)
-        resultText.text = "1"
     }
 }
