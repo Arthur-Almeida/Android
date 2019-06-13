@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">AboutMe</string>
+    <string name="name">Richard Hendricks</string>
+    <string name="yellow_star">Yellow star</string>
+    <string name="bio">I\'m a software designer, creator of the Pied Piper app and algorithm, and the protagonist in
+        HBO\'s Silicon Valley.
+        \n\nI invented and built the start-up Pied Piper, a program designed to find music matches, while living
+        at Erlich\'s Hacker Hostel alongside his best friend Big Head and fellow geeks Dinesh and Gilfoyle. Pied Piper\'s
+        compression algorithm triggered a bidding war and ultimately garnered funding from Peter Gregory\'s company
+        Raviga.
+        \n\nWe won the TechCrunch Disrupt and $50,000.
+    </string>
+    <string name="what_is_your_nickname">What is your Nickname?</string>
+    <string name="done">Done</string>
+</resources>
